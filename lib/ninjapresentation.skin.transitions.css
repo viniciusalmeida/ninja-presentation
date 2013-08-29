@@ -1,0 +1,11 @@
+/**
+ * Transition - Skin for ninjaPresentation
+ * Used for make the transitions of your presentation more atractive.
+ */
+
+slide {
+    transition: opacity 0.5s linear;
+}
+.fragment {
+    transition: opacity 0.5s linear;
+}

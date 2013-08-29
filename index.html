@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>ninjaPresentation</title>
+    <script src='lib/polymer.min.js'></script>
+    <link rel='import' src='src/ninjapresentation.html'>
+    <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Port+Lligat+Slab' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Share+Tech+Mono' rel='stylesheet' type='text/css'>
+</head>
+<body>
+
+    <ninjapresentation fontfamily='Bree Serif'>
+        
+        <slide>
+            <h1>&lt;ninjapresentation&gt;</h1>
+            <h3>Slides based on web components</h3>
+            <small>presented by <a href='https://twitter.com/vini_monstro' target='_blank'>@vini_monstro</a></small>
+        </slide>
+
+        <slide>
+            <h1>Slides fragments</h1>
+            <h4>Set <code>class='fragment'</code> in elements that must be shown fragmentarily</h4>
+            <p class='fragment' style='color: #C0392B;'>Cool huh?</p>
+        </slide>
+
+        <slide background='#C0392B' fontfamily='Port Lligat Slab' color='#FFF'>
+            <h1>Customizable</h1>
+            <p>Define the look of your presentation easily</p>
+            <ul>
+                <li class='fragment'>Through attribute in &lt;ninjapresentation&gt; and &lt;slide&gt;</li>
+                <li class='fragment'>Through inline CSS or an external skin file</li>
+            </ul>
+        </slide>
+
+        <slide>
+            <h1>Slides using only an image or video</h1>
+            <p>Set <code>alone='yes'</code> on &lt;slide&gt;</p>
+        </slide>
+
+        <slide alone='yes'>
+            <img src="http://www.splashtacular.com/pics/picM23121054253.png">
+        </slide>
+      
+        <slide alone='yes' background='url(http://www.all-sweets.com/gradient-wallpaper/radial-gradient/radial-gradient-1-1920x1080.jpg)'>
+            <iframe width="560" 
+                    height="315" 
+                    src="//www.youtube.com/embed/irGDN5Ysi_A?list=PLRAVCSU_HVYu-zlRaqArF8Ytwz1jlMOIM" 
+                    frameborder="0" 
+                    allowfullscreen>
+            </iframe>
+        </slide>
+
+        <slide class='fork' background='#000'>
+            <h1>On GitHub!</h1>
+            <h3>Fork and improve.</h3>
+            <p>Click on the fork ribbon :)</p>
+        </slide>
+
+    </ninjapresentation>
+
+    <!---->
+    <a href="https://github.com/viniciusalmeida/ninjaPresentation"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
+
+    <link rel="stylesheet" href="lib/ninjapresentation.skin.transitions.css">
+    <link rel="stylesheet" href="lib/ninjapresentation.skin.samplepresentation.css">
+</body>
+</html>

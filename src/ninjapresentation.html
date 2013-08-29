@@ -1,0 +1,174 @@
+<!-- ninjapresentation definition -->
+<polymer-element name='ninjapresentation' attributes='background fontfamily'>
+    <template>
+        <div>
+            <content></content>
+        </div>
+        <style>
+            div {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                background: {{background}};
+                font-family: {{fontfamily}};
+                list-style: inside;
+            }
+        </style>
+    </template>
+    <script>
+        (function () {
+            'use strict';
+
+            // Our component...
+            var ninjapresentation = window.ninjapresentation = {};
+
+            // Go through slides to identify them with sequential ids
+            ninjapresentation.referenciaSlides = function () {
+                var indexSlides;
+                for (indexSlides = 0; indexSlides < this.slides.length; indexSlides += 1) {
+                    this.slides[indexSlides].id = indexSlides + 1;
+                }
+            };
+
+            // Go through slides and hides them 
+            ninjapresentation.escondeSlides = function () {
+                var indexSlides,
+                    fragmentElements = document.getElementsByClassName('fragment');
+                for (indexSlides = 0; indexSlides < fragmentElements.length; indexSlides += 1) {
+                    fragmentElements[indexSlides].style.opacity = 0;
+                }
+                for (indexSlides = 0; indexSlides < this.slides.length; indexSlides += 1) {
+                    this.slides[indexSlides].style.opacity = 0;
+                }
+            };
+
+            // Show the slide with id equals hash on window.location
+            ninjapresentation.mostraSlide = function () {
+                var slideId = window.location.hash.substring(1);
+                if (slideId <= this.slides.length) {
+                    this.escondeSlides();
+                    document.getElementById(slideId).style.opacity = 1;
+                }
+            };
+
+            // Show the next slide or the next fragment element, if has...
+            ninjapresentation.nextSlide = function () {
+                var slideAtual = parseInt(window.location.hash.substring(1)),
+                    slideElements = document.getElementById(slideAtual).getElementsByClassName('fragment'),
+                    fragmentElements = new Array(), 
+                    indexSlides;
+                for (indexSlides = 0; indexSlides < slideElements.length; indexSlides +=1) {
+                    if (slideElements[indexSlides].style.opacity == 0) {
+                        fragmentElements.push(slideElements[indexSlides]);
+                    };
+                }
+                if (fragmentElements.length > 0) {
+                    fragmentElements[0].style.opacity = 1;
+                } else if (slideAtual < this.slides.length) {
+                    window.location.hash = slideAtual + 1;
+                }
+            };
+
+            // Show the previous slide
+            ninjapresentation.previousSlide = function () {
+                var slideAtual = parseInt(window.location.hash.substring(1));
+                if (slideAtual !== 1) {
+                    window.location.hash = slideAtual - 1;
+                }
+            };
+
+            // Control the key events and define comportament for the component
+            ninjapresentation.controleNavegacao = function (evento) {
+                var keyCode = evento.keyCode;
+                switch (keyCode) {
+                    case 32:
+                    case 39:
+                        this.nextSlide();
+                        break;
+                    case 37:
+                        this.previousSlide();
+                        break;
+                }
+            }
+
+            // Make all works
+            ninjapresentation.initialize = function () {
+                this.slides = document.getElementsByTagName('slide');
+                this.referenciaSlides();
+                if (window.location.hash === '') window.location.hash = 1;
+                this.mostraSlide();
+            };
+
+            // Keydown callback for navigation
+            document.onkeydown = function (e) {
+                ninjapresentation.controleNavegacao(e);
+            };
+            
+            // PushState callback to show the slides on right time
+            window.onpopstate = function () {
+                ninjapresentation.mostraSlide();
+            };
+
+            Polymer('ninjapresentation', {
+                created: function () {
+                    ninjapresentation.initialize();
+                },
+                background: '#CCC',
+                fontfamily: 'arial'
+            });
+        })();
+    </script>
+</polymer-element>
+
+<!-- slide definition -->
+<polymer-element name='slide' attributes='background fontfamily color alone'>
+    <template>
+        
+        <div>
+            <content></content>
+        </div>
+
+        <style>
+            div {
+                background: {{background}};
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 80%;
+                height: 100%;
+                text-align: center;
+                font-family: {{fontfamily}};
+                font-size: 3.5em;
+                color: {{color}};
+                padding: 0 10%;
+            }
+        </style>
+
+    </template>
+    <script>
+        (function () {
+            'use strict';
+            Polymer('slide', {
+                background: 'none',
+                fontfamily: 'inherit',
+                color: 'inherit',
+                created: function () {
+                    // centering elements when the 'alone' attribute is setted
+                    if (!!this.getAttribute('alone')) {
+                        var elemento = this.getElementsByTagName('img')[0] 
+                                       || this.getElementsByTagName('iframe')[0];
+                        elemento.onload = function () {
+                            elemento.style.position = 'absolute';
+                            elemento.style.left = elemento.style.top = '50%';
+                            elemento.style.marginTop = ((elemento.offsetHeight / 2) * -1) + 'px';
+                            elemento.style.marginLeft = ((elemento.offsetWidth / 2) * -1) + 'px';
+                        };
+                    }
+                }
+            });
+        })();
+    </script>
+</polymer-element>
