@@ -1,5 +1,5 @@
 <!-- ninjapresentation definition -->
-<polymer-element name='ninjapresentation' attributes='background fontfamily'>
+<polymer-element name='ninjapresentation' attributes='background fontfamily align'>
     <template>
         <div>
             <content></content>
@@ -15,6 +15,7 @@
                 background: {{background}};
                 font-family: {{fontfamily}};
                 list-style: inside;
+                text-align: {{align}};
             }
         </style>
     </template>
@@ -117,7 +118,8 @@
                     ninjapresentation.initialize();
                 },
                 background: '#CCC',
-                fontfamily: 'arial'
+                fontfamily: 'arial',
+                align: 'left'
             });
         })();
     </script>
