@@ -124,7 +124,7 @@
 </polymer-element>
 
 <!-- slide definition -->
-<polymer-element name='slide' attributes='background fontfamily color alone'>
+<polymer-element name='slide' attributes='background fontfamily color alone align'>
     <template>
         
         <div>
@@ -139,7 +139,7 @@
                 left: 0;
                 width: 80%;
                 height: 100%;
-                text-align: center;
+                text-align: {{align}};
                 font-family: {{fontfamily}};
                 font-size: 3.5em;
                 color: {{color}};
@@ -152,14 +152,10 @@
         (function () {
             'use strict';
             Polymer('slide', {
-                background: 'none',
-                fontfamily: 'inherit',
-                color: 'inherit',
                 created: function () {
-                    // centering elements when the 'alone' attribute is setted
-                    if (!!this.getAttribute('alone')) {
-                        var elemento = this.getElementsByTagName('img')[0] 
-                                       || this.getElementsByTagName('iframe')[0];
+                    // centering elements when the 'video' attribute is setted
+                    if (!!this.getAttribute('video')) {
+                        var elemento = this.getElementsByTagName('iframe')[0];
                         elemento.onload = function () {
                             elemento.style.position = 'absolute';
                             elemento.style.left = elemento.style.top = '50%';
@@ -167,7 +163,11 @@
                             elemento.style.marginLeft = ((elemento.offsetWidth / 2) * -1) + 'px';
                         };
                     }
-                }
+                },
+                align: 'inherit',
+                background: 'none',
+                fontfamily: 'inherit',
+                color: 'inherit'
             });
         })();
     </script>
