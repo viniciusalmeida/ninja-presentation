@@ -13,6 +13,7 @@ Do not be fooled. You do not have to be a ninja to use it! Let the tool work for
 |:--------|:------|:----------|
 |`background`|*string*|The default background of the presentation - Any value accepted by the CSS background property|
 |`fontfamily`|*string*|The default font-family of the presentation|
+|`color`|*string*|The default text color of the presentation|
 |`align`|*string*|The default text-align of the presentation|
 
 ##&lt;slide&gt;
