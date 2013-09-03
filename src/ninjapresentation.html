@@ -35,7 +35,7 @@
                 }
             };
 
-            // Go through slides and hides them 
+            // Go through slides and hides them
             ninjapresentation.escondeSlides = function () {
                 var indexSlides,
                     fragmentElements = document.getElementsByClassName('fragment');
@@ -60,7 +60,7 @@
             ninjapresentation.nextSlide = function () {
                 var slideAtual = parseInt(window.location.hash.substring(1)),
                     slideElements = document.getElementById(slideAtual).getElementsByClassName('fragment'),
-                    fragmentElements = new Array(), 
+                    fragmentElements = new Array(),
                     indexSlides;
                 for (indexSlides = 0; indexSlides < slideElements.length; indexSlides +=1) {
                     if (slideElements[indexSlides].style.opacity == 0) {
@@ -108,7 +108,7 @@
             document.onkeydown = function (e) {
                 ninjapresentation.controleNavegacao(e);
             };
-            
+
             // PushState callback to show the slides on right time
             window.onpopstate = function () {
                 ninjapresentation.mostraSlide();
@@ -130,7 +130,7 @@
 <!-- slide definition -->
 <polymer-element name='slide' attributes='background fontfamily color align video'>
     <template>
-        
+
         <div>
             <content></content>
         </div>
