@@ -1,5 +1,5 @@
 <!-- ninjapresentation definition -->
-<polymer-element name='ninja-presentation' attributes='background fontfamily align color'>
+<polymer-element name='ninja-presentation' attributes='background font align color'>
     <template>
         <div>
             <content></content>
@@ -14,7 +14,7 @@
                 color: {{color}};
                 overflow: hidden;
                 background: {{background}};
-                font-family: {{fontfamily}};
+                font-family: "{{font}}";
                 list-style: inside;
                 text-align: {{align}};
             }
@@ -118,36 +118,50 @@
                 created: function () {
                     ninjapresentation.initialize();
                 },
-                background: '#CCC',
-                fontfamily: 'arial',
+                background: '#BDC3C7',
+                font: 'sans-serif',
                 align: 'left',
-                color: '#000000'
+                color: '#34495E'
             });
-        })();
+        }());
     </script>
 </polymer-element>
 
 <!-- slide definition -->
-<polymer-element name='slide' attributes='background fontfamily color align video'>
+<polymer-element name='slide' attributes='background font color align'>
     <template>
 
-        <div>
-            <content></content>
+        <div class='container'>
+            <div class='aligner'>
+                <content></content>
+            <div>
         </div>
 
         <style>
-            div {
+            .container {
                 background: {{background}};
+                <template if="{{background == 'nothing'}}">
+                    background: none;
+                </template>
                 position: absolute;
                 top: 0;
                 left: 0;
                 width: 80%;
                 height: 100%;
                 text-align: {{align}};
-                font-family: {{fontfamily}};
+                font-family: "{{font}}";
                 font-size: 3.5em;
                 color: {{color}};
                 padding: 0 10%;
+                /* -- flex-boxes -- */
+                display: -webkit-flex;
+                display: flex;
+                -webkit-flex-align: center;
+                -webkit-align-items: center;
+                align-items: center;
+            }
+            .container .aligner {
+                width: 100%;
             }
         </style>
 
@@ -156,23 +170,11 @@
         (function () {
             'use strict';
             Polymer('slide', {
-                created: function () {
-                    // centering elements when the 'video' attribute is setted
-                    if (!!this.getAttribute('video')) {
-                        var elemento = this.getElementsByTagName('iframe')[0];
-                        elemento.onload = function () {
-                            elemento.style.position = 'absolute';
-                            elemento.style.left = elemento.style.top = '50%';
-                            elemento.style.marginTop = ((elemento.offsetHeight / 2) * -1) + 'px';
-                            elemento.style.marginLeft = ((elemento.offsetWidth / 2) * -1) + 'px';
-                        };
-                    }
-                },
                 align: 'inherit',
-                background: 'none',
-                fontfamily: 'inherit',
-                color: 'inherit'
+                background: 'nothing',
+                font: '',
+                color: ''
             });
-        })();
+        }());
     </script>
 </polymer-element>

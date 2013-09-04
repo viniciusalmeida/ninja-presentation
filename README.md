@@ -1,6 +1,6 @@
 #&lt;ninja-presentation&gt;
 
-A kit of Web Components wrappers to easily build a web based slideshow.
+A kit of Web Components wrappers to easily build a web based slideshow on Google Chrome.
 Attribute names are similar to the css properties. It is not an accident ;)
 
 Do not be fooled. You do not have to be a ninja to use it! Let the tool work for you.
@@ -14,7 +14,7 @@ Do not be fooled. You do not have to be a ninja to use it! Let the tool work for
 |Attribute|Options|Description|
 |:--------|:------|:----------|
 |`background`|*string*|The default background of the presentation - Any value accepted by the CSS background property|
-|`fontfamily`|*string*|The default font-family of the presentation|
+|`font`|*string*|The default font-family of the presentation|
 |`color`|*string*|The default text color of the presentation|
 |`align`|*string*|The default text-align of the presentation|
 
@@ -23,10 +23,9 @@ Do not be fooled. You do not have to be a ninja to use it! Let the tool work for
 |Attribute|Options|Description|
 |:--------|:------|:----------|
 |`background`|*string*|The background on the slide - Any value accepted by the CSS background property|
-|`fontfamily`|*string*|The font-family of the texts on the slide|
+|`font`|*string*|The font-family of the texts on the slide|
 |`color`|*string*|The font color of the texts on the slide|
 |`align`|*string*|The align of the texts on the slide|
-|`video`|*boolean*|Flag to inform the use only video|
 
 @ works on Chrome
 
