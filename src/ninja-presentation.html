@@ -26,7 +26,21 @@
 
             // Our component...
             var ninjapresentation = window.ninjapresentation = {};
-
+            
+            ninjapresentation.options = {
+                slideId : 1,
+                showRightClass : "animated fadeInRightBig",
+                showLeftClass : "animated fadeInLeftBig", 
+                hideClass : "animated" //TODO: Add animations for hidding
+                
+            };
+            
+            ninjapresentation.setSlideId = function(id, movement){
+                this.options.slideId = id;
+                window.location.hash = id;
+                this.escondeSlides();
+                this.mostraSlide(movement);
+            }
             // Go through slides to identify them with sequential ids
             ninjapresentation.referenciaSlides = function () {
                 var indexSlides;
@@ -43,23 +57,26 @@
                     fragmentElements[indexSlides].style.opacity = 0;
                 }
                 for (indexSlides = 0; indexSlides < this.slides.length; indexSlides += 1) {
-                    this.slides[indexSlides].style.opacity = 0;
+                    if(this.slides[indexSlides].id !== this.options.slideId ){
+                        this.slides[indexSlides].className = this.options.hideClass;
+                    }
                 }
             };
 
-            // Show the slide with id equals hash on window.location
-            ninjapresentation.mostraSlide = function () {
-                var slideId = window.location.hash.substring(1);
-                if (slideId <= this.slides.length) {
-                    this.escondeSlides();
-                    document.getElementById(slideId).style.opacity = 1;
+            // Show the slide with id = options.slideID
+            ninjapresentation.mostraSlide = function (movement) {
+                
+                if (this.options.slideId <= this.slides.length) {
+                    var className = movement == 'left' ? this.options.showLeftClass : this.options.showRightClass;
+                    document.getElementById(this.options.slideId).className= className;
                 }
             };
 
             // Show the next slide or the next fragment element, if has...
             ninjapresentation.nextSlide = function () {
-                var slideAtual = parseInt(window.location.hash.substring(1)),
-                    slideElements = document.getElementById(slideAtual).getElementsByClassName('fragment'),
+
+                var slideAtual = this.options.slideId,
+                    slideElements = this.slides[slideAtual - 1].getElementsByClassName('fragment'),
                     fragmentElements = new Array(),
                     indexSlides;
                 for (indexSlides = 0; indexSlides < slideElements.length; indexSlides +=1) {
@@ -68,17 +85,17 @@
                     };
                 }
                 if (fragmentElements.length > 0) {
-                    fragmentElements[0].style.opacity = 1;
-                } else if (slideAtual < this.slides.length) {
-                    window.location.hash = slideAtual + 1;
+                    fragmentElements[0].style.opacity = 1; 
+                } else if (slideAtual < this.slides.length){ 
+                    this.setSlideId(parseInt(slideAtual,10) + 1, 'right');
                 }
             };
 
             // Show the previous slide
             ninjapresentation.previousSlide = function () {
-                var slideAtual = parseInt(window.location.hash.substring(1));
+                var slideAtual = this.options.slideId;
                 if (slideAtual !== 1) {
-                    window.location.hash = slideAtual - 1;
+                    this.setSlideId(slideAtual - 1, 'left');
                 }
             };
 
@@ -100,8 +117,12 @@
             ninjapresentation.initialize = function () {
                 this.slides = document.getElementsByTagName('slide');
                 this.referenciaSlides();
-                if (window.location.hash === '') window.location.hash = 1;
-                this.mostraSlide();
+                if (window.location.hash.indexOf('#') === -1) {
+                    this.setSlideId(1);
+                }else{
+                    this.setSlideId( window.location.hash.substring(window.location.hash.indexOf('#')+1, window.location.hash.length));
+                }
+                
             };
 
             // Keydown callback for navigation
