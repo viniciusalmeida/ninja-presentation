@@ -23,9 +23,6 @@ module.exports = function(grunt) {
         app: ''
     };
 
-    try {
-        config.app = require('./bower.json').appPath || config.app;
-    } catch (e) {}
 
     grunt.initConfig({
         app: config,
