@@ -18,3 +18,6 @@ code {
 .fork h1 {
 	text-shadow: 5px 5px 0 #666;
 }
+slide { -webkit-transform: translateX(2000px); display: none; height: 100%;}
+slide.fadeInRightBig{display:block}
+slide.fadeInLeftBig{display:block}
