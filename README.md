@@ -56,6 +56,10 @@ To use this feature simply set ```class='fragment'``` on the necessary elements.
 
 ---
 
+Look this [yeoman generator](https://github.com/rafinskipg/generator-webcomponents/).
+
+---
+
 @ works on Chrome
 
 *Made by [@vini_monstro](https://twitter.com/vini_monstro)*
