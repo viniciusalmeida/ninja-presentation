@@ -5,7 +5,7 @@ Attribute names are similar to the css properties. It is not an accident ;)
 
 Do not be fooled. You do not have to be a ninja to use it! Let the tool work for you.
 
-> [See the demo](http://viniciusalmeida.github.io/ninja-presentation) and do not forget to see [your code](https://github.com/viniciusalmeida/ninja-presentation/blob/gh-pages/index.html).
+> [See the demo](http://viniciusalmeida.github.io/ninja-presentation/#1) and do not forget to see [your code](https://github.com/viniciusalmeida/ninja-presentation/blob/gh-pages/index.html).
 
 > A [real presentation](http://viniciusalmeida.github.io/presentations/introducing-the-gruntjs) using ninja-presentation
 
