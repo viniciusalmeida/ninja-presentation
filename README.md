@@ -62,4 +62,4 @@ Look this [yeoman generator](https://github.com/rafinskipg/generator-webcomponen
 
 @ works on Chrome
 
-*Made by [@vini_monstro](https://twitter.com/vini_monstro)*
+*Made by [@vimoding](https://twitter.com/vimoding)*
