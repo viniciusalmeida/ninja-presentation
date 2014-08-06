@@ -3,8 +3,9 @@
 <head>
     <meta charset='utf-8'>
     <title>ninjaPresentation</title>
-    <script src='//cdnjs.cloudflare.com/ajax/libs/polymer/0.0.20130816/polymer.min.js'></script>
-    <link rel='import' src='src/ninja-presentation.html'>
+    <script type="text/javascript" src="bower_components/platform/platform.js"></script>
+    <link rel='import' href='src/ninja-presentation.html'>
+
     <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet'>
     <link href='http://fonts.googleapis.com/css?family=Port+Lligat+Slab' rel='stylesheet'>
     <link href='http://fonts.googleapis.com/css?family=Share+Tech+Mono' rel='stylesheet'>
@@ -16,49 +17,49 @@
 
     <ninja-presentation font='Bree Serif'>
 
-        <slide align='center'>
+        <a-slide align='center'>
             <h1>ninja presentation</h1>
             <h4>Slides based<br>on web components</h4>
             <p><small>Use arrows or space to navigate between the slides</small></p>
-        </slide>
+        </a-slide>
 
-        <slide>
+        <a-slide>
             <h1>Slides fragments</h1>
             <h4>Set <code>class='fragment'</code> in elements that must be shown fragmentarily</h4>
             <p class='fragment' style='color: #C0392B;'>Cool huh?</p>
-        </slide>
+        </a-slide>
 
-        <slide background='#C0392B' font='Port Lligat Slab' color='#FFF'>
+        <a-slide background='#C0392B' font='Port Lligat Slab' color='#FFF'>
             <h1>Customizable</h1>
             <p>Define the look of your presentation easily</p>
             <ul>
                 <li class='fragment'>Through attribute in &lt;ninja-presentation&gt; and &lt;slide&gt; tags</li>
                 <li class='fragment'>Through inline CSS or an external skin file</li>
             </ul>
-        </slide>
+        </a-slide>
 
-        <slide align='center'>
+        <a-slide align='center'>
             <h1>Markup Easy</h1>
-        </slide>
+        </a-slide>
 
-        <slide align='center'>
+        <a-slide align='center'>
             <img src="sample_assets/mark.png" height='70%'>
-        </slide>
+        </a-slide>
 
-        <slide align='center'>
+        <a-slide align='center'>
             <iframe width="560"
                     height="315"
                     src="//www.youtube.com/embed/irGDN5Ysi_A?list=PLRAVCSU_HVYu-zlRaqArF8Ytwz1jlMOIM"
                     frameborder="0"
                     allowfullscreen>
             </iframe>
-        </slide>
+        </a-slide>
 
-        <slide class='fork' background='#000'>
+        <a-slide class='fork' background='#000'>
             <h1>On GitHub!</h1>
             <h2 align='center'>Fork and improve.</h2>
             <p align='right'>Click on the fork ribbon :)</p>
-        </slide>
+        </a-slide>
 
     </ninja-presentation>
 
