@@ -11,11 +11,6 @@ Do not be fooled. You do not have to be a ninja to use it! Let the tool work for
 
 ##Usage
 
-Import the [Polymer](http://www.polymer-project.org/) on your page:
-```html
-<script src="//cdnjs.cloudflare.com/ajax/libs/polymer/0.0.20130816/polymer.min.js"></script>
-```
-
 Import the custom element:
 ```html
 <link rel='import' src='src/ninja-presentation.html'>
@@ -24,9 +19,9 @@ Import the custom element:
 Start the markup of you presentation:
 ```html
 <ninja-presentation>
-	<slide>
+	<a-slide>
 		<h1>Is very simple, huh?</h1>
-	</slide>
+	</a-slide>
 </ninja-presentation>
 ```
 
@@ -49,10 +44,6 @@ Start the markup of you presentation:
 |`font`|*string*|The font-family of the texts on the slide|
 |`color`|*string*|The font color of the texts on the slide|
 |`align`|*string*|The align of the texts on the slide|
-
-###Fragmented slide elements
-
-To use this feature simply set ```class='fragment'``` on the necessary elements.
 
 ---
 
