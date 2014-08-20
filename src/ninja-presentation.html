@@ -1,4 +1,5 @@
 <!-- ninjapresentation definition -->
+<link rel="import" href="../bower_components/polymer/polymer.html">
 <polymer-element name='ninja-presentation' attributes='background font align color'>
     <template>
         <div>
@@ -21,135 +22,132 @@
         </style>
     </template>
     <script>
-        (function () {
-            'use strict';
 
-            // Our component...
-            var ninjapresentation = window.ninjapresentation = {};
+        // Our component...
+        var ninjapresentation = window.ninjapresentation = {};
+        
+        ninjapresentation.options = {
+            slideId : 1,
+            showRightClass : "animated fadeInRightBig",
+            showLeftClass : "animated fadeInLeftBig", 
+            hideClass : "animated" //TODO: Add animations for hidding
             
-            ninjapresentation.options = {
-                slideId : 1,
-                showRightClass : "animated fadeInRightBig",
-                showLeftClass : "animated fadeInLeftBig", 
-                hideClass : "animated" //TODO: Add animations for hidding
-                
-            };
-            
-            ninjapresentation.setSlideId = function(id, movement){
-                this.options.slideId = id;
-                window.location.hash = id;
-                this.escondeSlides();
-                this.mostraSlide(movement);
+        };
+        
+        ninjapresentation.setSlideId = function(id, movement){
+            this.options.slideId = id;
+            window.location.hash = id;
+            this.escondeSlides();
+            this.mostraSlide(movement);
+        }
+        // Go through slides to identify them with sequential ids
+        ninjapresentation.referenciaSlides = function () {
+            var indexSlides;
+            for (indexSlides = 0; indexSlides < this.slides.length; indexSlides += 1) {
+                this.slides[indexSlides].id = indexSlides + 1;
             }
-            // Go through slides to identify them with sequential ids
-            ninjapresentation.referenciaSlides = function () {
-                var indexSlides;
-                for (indexSlides = 0; indexSlides < this.slides.length; indexSlides += 1) {
-                    this.slides[indexSlides].id = indexSlides + 1;
-                }
-            };
+        };
 
-            // Go through slides and hides them
-            ninjapresentation.escondeSlides = function () {
-                var indexSlides,
-                    fragmentElements = document.getElementsByClassName('fragment');
-                for (indexSlides = 0; indexSlides < fragmentElements.length; indexSlides += 1) {
-                    fragmentElements[indexSlides].style.opacity = 0;
-                }
-                for (indexSlides = 0; indexSlides < this.slides.length; indexSlides += 1) {
-                    if(this.slides[indexSlides].id !== this.options.slideId ){
-                        this.slides[indexSlides].className = this.options.hideClass;
-                    }
-                }
-            };
-
-            // Show the slide with id = options.slideID
-            ninjapresentation.mostraSlide = function (movement) {
-                
-                if (this.options.slideId <= this.slides.length) {
-                    var className = movement == 'left' ? this.options.showLeftClass : this.options.showRightClass;
-                    document.getElementById(this.options.slideId).className= className;
-                }
-            };
-
-            // Show the next slide or the next fragment element, if has...
-            ninjapresentation.nextSlide = function () {
-
-                var slideAtual = this.options.slideId,
-                    slideElements = this.slides[slideAtual - 1].getElementsByClassName('fragment'),
-                    fragmentElements = new Array(),
-                    indexSlides;
-                for (indexSlides = 0; indexSlides < slideElements.length; indexSlides +=1) {
-                    if (slideElements[indexSlides].style.opacity == 0) {
-                        fragmentElements.push(slideElements[indexSlides]);
-                    };
-                }
-                if (fragmentElements.length > 0) {
-                    fragmentElements[0].style.opacity = 1; 
-                } else if (slideAtual < this.slides.length){ 
-                    this.setSlideId(parseInt(slideAtual,10) + 1, 'right');
-                }
-            };
-
-            // Show the previous slide
-            ninjapresentation.previousSlide = function () {
-                var slideAtual = this.options.slideId;
-                if (slideAtual !== 1) {
-                    this.setSlideId(slideAtual - 1, 'left');
-                }
-            };
-
-            // Control the key events and define comportament for the component
-            ninjapresentation.controleNavegacao = function (evento) {
-                var keyCode = evento.keyCode;
-                switch (keyCode) {
-                    case 32:
-                    case 39:
-                        this.nextSlide();
-                        break;
-                    case 37:
-                        this.previousSlide();
-                        break;
+        // Go through slides and hides them
+        ninjapresentation.escondeSlides = function () {
+            var indexSlides,
+                fragmentElements = document.getElementsByClassName('fragment');
+            for (indexSlides = 0; indexSlides < fragmentElements.length; indexSlides += 1) {
+                fragmentElements[indexSlides].style.opacity = 0;
+            }
+            for (indexSlides = 0; indexSlides < this.slides.length; indexSlides += 1) {
+                if(this.slides[indexSlides].id !== this.options.slideId ){
+                    this.slides[indexSlides].className = this.options.hideClass;
                 }
             }
+        };
 
-            // Make all works
-            ninjapresentation.initialize = function () {
-                this.slides = document.getElementsByTagName('slide');
-                this.referenciaSlides();
-                if (window.location.hash.indexOf('#') === -1) {
-                    this.setSlideId(1);
-                }else{
-                    this.setSlideId( window.location.hash.substring(window.location.hash.indexOf('#')+1, window.location.hash.length));
-                }
-                
-            };
+        // Show the slide with id = options.slideID
+        ninjapresentation.mostraSlide = function (movement) {
+            
+            if (this.options.slideId <= this.slides.length) {
+                var className = movement == 'left' ? this.options.showLeftClass : this.options.showRightClass;
+                document.getElementById(this.options.slideId).className= className;
+            }
+        };
 
-            // Keydown callback for navigation
-            document.onkeydown = function (e) {
-                ninjapresentation.controleNavegacao(e);
-            };
+        // Show the next slide or the next fragment element, if has...
+        ninjapresentation.nextSlide = function () {
 
-            // PushState callback to show the slides on right time
-            window.onpopstate = function () {
-                ninjapresentation.mostraSlide();
-            };
+            var slideAtual = this.options.slideId,
+                slideElements = this.slides[slideAtual - 1].getElementsByClassName('fragment'),
+                fragmentElements = new Array(),
+                indexSlides;
+            for (indexSlides = 0; indexSlides < slideElements.length; indexSlides +=1) {
+                if (slideElements[indexSlides].style.opacity === 0) {
+                    fragmentElements.push(slideElements[indexSlides]);
+                };
+            }
+            if (fragmentElements.length > 0) {
+                fragmentElements[0].style.opacity = 1; 
+            } else if (slideAtual < this.slides.length){ 
+                this.setSlideId(parseInt(slideAtual,10) + 1, 'right');
+            }
+        };
 
-            Polymer('ninja-presentation', {
-                created: function () {
-                    ninjapresentation.initialize();
-                },
-                background: '#BDC3C7',
-                font: 'sans-serif',
-                align: 'left',
-                color: '#34495E'
-            });
-        }());
+        // Show the previous slide
+        ninjapresentation.previousSlide = function () {
+            var slideAtual = this.options.slideId;
+            if (slideAtual !== 1) {
+                this.setSlideId(slideAtual - 1, 'left');
+            }
+        };
+
+        // Control the key events and define comportament for the component
+        ninjapresentation.controleNavegacao = function (evento) {
+            var keyCode = evento.keyCode;
+            switch (keyCode) {
+                case 32:
+                case 39:
+                    this.nextSlide();
+                    break;
+                case 37:
+                    this.previousSlide();
+                    break;
+            }
+        }
+
+        // Make all works
+        ninjapresentation.initialize = function () {
+            this.slides = document.getElementsByTagName('a-slide');
+            this.referenciaSlides();
+            if (window.location.hash.indexOf('#') === -1) {
+                this.setSlideId(1);
+            }else{
+                this.setSlideId( window.location.hash.substring(window.location.hash.indexOf('#')+1, window.location.hash.length));
+            }
+            
+        };
+
+        // Keydown callback for navigation
+        document.onkeydown = function (e) {
+            ninjapresentation.controleNavegacao(e);
+        };
+
+        // PushState callback to show the slides on right time
+        window.onpopstate = function () {
+            ninjapresentation.mostraSlide();
+        };
+
+        Polymer('ninja-presentation', {
+            created: function () {
+                ninjapresentation.initialize();
+            },
+            background: '#BDC3C7',
+            font: 'sans-serif',
+            align: 'left',
+            color: '#34495E'
+        });
     </script>
 </polymer-element>
 
 <!-- slide definition -->
-<polymer-element name='slide' attributes='background font color align'>
+<polymer-element name='a-slide' attributes='background font color align'>
     <template>
 
         <div class='container'>
@@ -188,14 +186,11 @@
 
     </template>
     <script>
-        (function () {
-            'use strict';
-            Polymer('slide', {
-                align: 'inherit',
-                background: 'nothing',
-                font: '',
-                color: ''
-            });
-        }());
+        Polymer('a-slide', {
+            align: 'inherit',
+            background: 'nothing',
+            font: '',
+            color: ''
+        });
     </script>
 </polymer-element>
