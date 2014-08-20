@@ -36,7 +36,7 @@ Start the markup of you presentation:
 |`color`|*string*|The default text color of the presentation|
 |`align`|*string*|The default text-align of the presentation|
 
-###&lt;slide&gt; options
+###&lt;a-slide&gt; options
 
 |Attribute|Options|Description|
 |:--------|:------|:----------|
