@@ -1,4 +1,3 @@
-<!-- ninjapresentation definition -->
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <polymer-element name='ninja-presentation' attributes='background font align color'>
     <template>
@@ -22,15 +21,44 @@
         </style>
     </template>
     <script>
+        var ninjaPresentation = window.ninjaPresentation = {};
 
-        // Our component...
-        var ninjapresentation = window.ninjapresentation = {};
+        ninjaPresentation.options = {};
 
-        ninjapresentation.options = {};
+        ninjaPresentation.initialize = function () {
+            this.slides = document.getElementsByTagName('ninja-slide');
+            this.addIdentifierAndHideAllSlides();
+            this.setInitialSlide();
+        };
+
+        ninjaPresentation.addIdentifierAndHideAllSlides = function () {
+            var iterator,
+                slidesCount = this.slides.length;
+            for (iterator = 0; iterator < slidesCount; iterator++) {
+                this.slides[iterator].id = iterator + 1;
+                this.slides[iterator].style.opacity = 0;
+            }
+        };
+
+        ninjaPresentation.setInitialSlide = function () {
+            if (this.hasSlideOnLocationHash()) {
+                return
+            } else {
+                this.focusSlide(1);
+            }
+        };
+
+        ninjaPresentation.hasSlideOnLocationHash = function () {
+            return !!window.location.hash.substring(window.location.hash.indexOf('#'));
+        };
+
+        ninjaPresentation.focusSlide = function (slideIdentifier) {
+            document.getElementById(slideIdentifier).style.opacity = 1;
+        };
 
         Polymer('ninja-presentation', {
             created: function () {
-                ninjapresentation.initialize();
+                ninjaPresentation.initialize();
             },
             background: '#BDC3C7',
             font: 'sans-serif',
@@ -40,7 +68,6 @@
     </script>
 </polymer-element>
 
-<!-- slide definition -->
 <polymer-element name='ninja-slide' attributes='background font color align'>
     <template>
 
