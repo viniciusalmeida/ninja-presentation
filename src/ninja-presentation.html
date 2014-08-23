@@ -41,11 +41,7 @@
         };
 
         ninjaPresentation.setInitialSlide = function () {
-            if (this.hasSlideOnLocationHash()) {
-                return
-            } else {
-                this.focusSlide(1);
-            }
+            this.focusSlide((this.hasSlideOnLocationHash()) ? this.currentSlide() : 1);
         };
 
         ninjaPresentation.hasSlideOnLocationHash = function () {
@@ -54,7 +50,12 @@
 
         ninjaPresentation.focusSlide = function (slideIdentifier) {
             document.getElementById(slideIdentifier).style.opacity = 1;
+            window.location.hash = slideIdentifier
         };
+
+        ninjaPresentation.currentSlide = function () {
+            return window.location.hash.substring(window.location.hash.indexOf('#')+1);
+        }
 
         Polymer('ninja-presentation', {
             created: function () {
