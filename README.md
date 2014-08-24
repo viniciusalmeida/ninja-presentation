@@ -7,14 +7,21 @@ Do not be fooled. You do not have to be a ninja to use it! Let the tool work for
 
 > [See the demo](http://viniciusalmeida.github.io/ninja-presentation/#1) and do not forget to see [your code](https://github.com/viniciusalmeida/ninja-presentation/blob/gh-pages/index.html).
 
-> A [real presentation](http://viniciusalmeida.github.io/presentations/introducing-the-gruntjs) using ninja-presentation
+##Usage with bower
 
-##Usage
-
-Import the custom element:
-```html
-<link rel='import' src='src/ninja-presentation.html'>
+To install:
 ```
+$ bower install ninja-presentation
+```
+
+Import the custom element and your dependencies on your presentation page:
+```html
+<script type="text/javascript" src="bower_components/platform/platform.js"></script>
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel='import' href='bower_components/ninja-presentation/src/ninja-presentation.html'>
+```
+
+##Markup to use the component
 
 Start the markup of you presentation:
 ```html
