@@ -69,18 +69,35 @@
         };
 
         ninjaPresentation.controllNavigation = function (event) {
-            var currentSlide = Number(this.currentSlide());
             switch (event.keyCode) {
                 case 32:
                 case 39:
-                    this.hideSlide(currentSlide);
-                    this.focusSlide(currentSlide + 1)
+                    this.nextSlide();
                     break;
                 case 37:
-                    this.hideSlide(currentSlide);
-                    this.focusSlide(currentSlide - 1)
+                    this.previousSlide();
                     break;
             }
+        };
+
+        ninjaPresentation.nextSlide = function () {
+            var currentSlide = Number(this.currentSlide());
+            try {
+                this.hideSlide(currentSlide);
+                this.focusSlide(currentSlide + 1);
+            } catch (error) {
+                console.log('The End');
+            };
+        };
+
+        ninjaPresentation.previousSlide = function () {
+            var currentSlide = Number(this.currentSlide());
+            try {
+                this.hideSlide(currentSlide);
+                this.focusSlide(currentSlide - 1);
+            } catch (error) {
+                console.log('The beginning of our journey');
+            };
         };
 
         Polymer('ninja-presentation', {
