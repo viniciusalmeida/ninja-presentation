@@ -19,9 +19,9 @@ Import the custom element:
 Start the markup of you presentation:
 ```html
 <ninja-presentation>
-	<a-slide>
+	<ninja-slide>
 		<h1>Is very simple, huh?</h1>
-	</a-slide>
+	</ninja-slide>
 </ninja-presentation>
 ```
 
@@ -36,7 +36,7 @@ Start the markup of you presentation:
 |`color`|*string*|The default text color of the presentation|
 |`align`|*string*|The default text-align of the presentation|
 
-###&lt;a-slide&gt; options
+###&lt;ninja-slide&gt; options
 
 |Attribute|Options|Description|
 |:--------|:------|:----------|
