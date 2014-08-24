@@ -25,13 +25,11 @@
 
 <polymer-element name='ninja-slide' attributes='background font color align'>
     <template>
-
         <div class='container'>
             <div class='aligner'>
                 <content></content>
             <div>
         </div>
-
         <style>
             .container {
                 background: {{background}};
@@ -59,14 +57,6 @@
                 width: 100%;
             }
         </style>
-
     </template>
-    <script>
-        Polymer('ninja-slide', {
-            align: 'inherit',
-            background: 'nothing',
-            font: '',
-            color: ''
-        });
-    </script>
+    <script src="ninja-slide.js"></script>
 </polymer-element>
