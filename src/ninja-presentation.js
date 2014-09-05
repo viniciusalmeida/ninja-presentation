@@ -3,6 +3,7 @@ var ninjaPresentation = window.ninjaPresentation = {};
 ninjaPresentation.initialize = function () {
     this.slides = document.getElementsByTagName('ninja-slide');
     this.addIdentifierAndHideAllSlides();
+    this.hideAllFragmentsOnPresentation();
     this.setInitialSlide();
     this.addListeners();
 };
@@ -13,6 +14,14 @@ ninjaPresentation.addIdentifierAndHideAllSlides = function () {
     for (iterator = 0; iterator < slidesCount; iterator++) {
         this.slides[iterator].id = iterator + 1;
         this.slides[iterator].style.opacity = 0;
+    }
+};
+
+ninjaPresentation.hideAllFragmentsOnPresentation = function () {
+    var iterator,
+        fragments = document.getElementsByClassName('fragment');
+    for (iterator = 0; iterator < fragments.length; iterator++) {
+        fragments[iterator].style.opacity = 0;
     }
 };
 
