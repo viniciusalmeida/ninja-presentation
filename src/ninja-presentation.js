@@ -56,12 +56,19 @@ ninjaPresentation.controllNavigation = function (event) {
     switch (event.keyCode) {
         case 32:
         case 39:
-            this.nextSlide();
+            this.nextState();
             break;
         case 37:
             this.previousSlide();
             break;
     }
+};
+
+ninjaPresentation.nextState = function () {
+    var currentSlide = Number(this.currentSlide());
+    if (this.slides[currentSlide - 1].getElementsByClassName('fragment').length == 0) {
+        this.nextSlide();
+    } else console.log('Show fragment');
 };
 
 ninjaPresentation.nextSlide = function () {
