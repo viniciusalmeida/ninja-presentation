@@ -12,7 +12,7 @@ ninjaPresentation.addIdentifierAndHideAllSlides = function () {
     var iterator,
         slidesCount = this.slides.length;
     for (iterator = 0; iterator < slidesCount; iterator++) {
-        this.slides[iterator].id = iterator + 1;
+        this.slides[iterator].id            = iterator + 1;
         this.slides[iterator].style.opacity = 0;
     }
 };
@@ -65,10 +65,17 @@ ninjaPresentation.controllNavigation = function (event) {
 };
 
 ninjaPresentation.nextState = function () {
-    var currentSlide = Number(this.currentSlide());
-    if (this.slides[currentSlide - 1].getElementsByClassName('fragment').length == 0) {
-        this.nextSlide();
-    } else console.log('Show fragment');
+    var currentSlide            = this.slides[Number(this.currentSlide()) - 1],
+        fragmentsOnCurrentSlide = this.getFragmentsOnSlide(currentSlide);
+    if (fragmentsOnCurrentSlide.length > 0) {
+        fragmentsOnCurrentSlide[0].style.opacity = 1;
+        fragmentsOnCurrentSlide[0].className     = 'visible-fragment';
+        fragmentsOnCurrentSlide = this.getFragmentsOnSlide(currentSlide);
+    } else this.nextSlide();
+};
+
+ninjaPresentation.getFragmentsOnSlide = function (slide) {
+    return slide.getElementsByClassName('fragment');
 };
 
 ninjaPresentation.nextSlide = function () {
@@ -76,6 +83,7 @@ ninjaPresentation.nextSlide = function () {
     try {
         this.hideSlide(currentSlide);
         this.focusSlide(currentSlide + 1);
+        this.hideFragmentsOnSlide(this.slides[Number(this.currentSlide()) - 1]);
     } catch (error) {
         console.log('The End');
     };
@@ -86,9 +94,19 @@ ninjaPresentation.previousSlide = function () {
     try {
         this.hideSlide(currentSlide);
         this.focusSlide(currentSlide - 1);
+        this.hideFragmentsOnSlide(this.slides[Number(this.currentSlide()) - 1]);
     } catch (error) {
         console.log('The beginning of our journey');
     };
+};
+
+ninjaPresentation.hideFragmentsOnSlide = function (slide) {
+    var iterator,
+        visibleFragments = slide.getElementsByClassName('visible-fragment');
+    for (iterator = 0; iterator < visibleFragments.length; iterator++) {
+        visibleFragments[iterator].style.opacity = 0;
+        visibleFragments[iterator].className     = 'visible-fragment fragment';
+    }
 };
 
 Polymer('ninja-presentation', {
