@@ -52,6 +52,20 @@ Start the markup of you presentation:
 |`color`|*string*|The font color of the texts on the slide|
 |`align`|*string*|The align of the texts on the slide|
 
+### Using fragments
+
+Add `class="fragment"` in elements to show one by one
+
+```html
+<ninja-slide background='green' font='Port Lligat Slab' color='#FFF' align='center'>
+    <h1>Fragments</h1>
+    <ul>
+        <li class="fragment">First fragment</li>
+        <li class="fragment">Second fragment</li>
+    </ul>
+</ninja-slide>
+```
+
 ---
 
 Look this [yeoman generator](https://github.com/rafinskipg/generator-webcomponents/).
