@@ -1,6 +1,6 @@
 {
   "name": "ninja-presentation",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "homepage": "http://viniciusalmeida.github.io/ninja-presentation",
   "description": "Do not be fooled. You do not have to be a ninja to use this toolkit for slides presentation!",
   "main": "src/ninja-presentation.html",
