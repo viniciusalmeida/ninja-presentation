@@ -5,7 +5,7 @@
   "description": "Do not be fooled. You do not have to be a ninja to use this toolkit for slides presentation!",
   "main": "src/ninja-presentation.html",
   "keywords": [
-    "slides", "presentation", "web", "components", "custom", "elements"
+    "slides", "presentation", "web", "components", "custom", "elements", "web-components"
   ],
   "authors": [
     "Vinícius Almeida"
