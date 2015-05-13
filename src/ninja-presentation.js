@@ -1,5 +1,5 @@
 (function(win, doc) {
-    var ninjaPresentation = window.ninjaPresentation = {};
+    var ninjaPresentation = win.ninjaPresentation = {};
 
     ninjaPresentation.initialize = function () {
         this.slides = doc.getElementsByTagName('ninja-slide');
